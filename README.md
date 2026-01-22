@@ -132,7 +132,6 @@ The application is deployed with:
 - Nginx reverse proxy
 - Let's Encrypt SSL certificate
 - Auto-renewal configuration
-- Port 3003 (internal), HTTPS 443 (external)
 
 ## Contributing
 
@@ -145,7 +144,3 @@ The application is deployed with:
 ## License
 
 This project is private and proprietary.
-
-## Contact
-
-For questions or support, contact the development team.
