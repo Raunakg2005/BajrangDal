@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: bhajrang-dal-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/bajrang_dal
+      - ADMIN_PASSWORD=JaiShriRam
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  mongo:
+    container_name: bhajrang-dal-mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017" # Exposed to host if you want to inspect via Compass
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

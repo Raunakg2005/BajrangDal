@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    image: warlord9004/bhajrang-dal:latest
+    container_name: bhajrang-dal-app
+    restart: always
+    ports:
+      - "8080:3000" # Isolated on port 8080
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/bajrang_dal
+      - ADMIN_PASSWORD=JaiShriRam
+    depends_on:
+      - mongo
+    networks:
+      - bhajrang-network
+
+  mongo:
+    image: mongo:latest
+    container_name: bhajrang-dal-mongo
+    restart: always
+    volumes:
+      - bhajrang-mongo-data:/data/db
+    networks:
+      - bhajrang-network
+
+networks:
+  bhajrang-network:
+    name: bhajrang-dal-network
+    driver: bridge
+
+volumes:
+  bhajrang-mongo-data:
+    name: bhajrang-dal-data
