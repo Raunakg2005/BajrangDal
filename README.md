@@ -1,36 +1,151 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bajrang Dal Membership Application
+
+A secure, full-stack web application for managing Bajrang Dal membership applications with an administrative dashboard.
+
+**Live Demo:** https://bajrangdal.quantyxio.cloud
+
+## Features
+
+### Public Application Form
+- Bilingual interface (English/Hindi)
+- Personal information collection
+- Address management (Present & Permanent)
+- Document upload (Aadhar Card - Front & Back)
+- Client-side image compression
+- Real-time form validation
+
+### Admin Dashboard
+- Password-protected authentication
+- View all membership applications
+- Application status management (Approve/Reject/Pending)
+- Detailed application review
+- Print functionality
+- Responsive design (Desktop & Mobile)
+
+## Technology Stack
+
+- **Frontend:** Next.js 16.1.4, React 19, TypeScript
+- **Styling:** TailwindCSS with custom Saffron theme
+- **Animation:** Framer Motion
+- **Database:** MongoDB
+- **Deployment:** Docker, Nginx, Let's Encrypt SSL
+- **Icons:** Lucide React
+
+## Project Structure
+
+```
+bhajrang-dal/
+├── src/
+│   ├── app/
+│   │   ├── admin/          # Admin dashboard
+│   │   ├── api/            # API routes
+│   │   ├── join/           # Membership form
+│   │   └── page.tsx        # Landing page
+│   ├── models/             # MongoDB schemas
+│   └── lib/                # Utilities (DB connection)
+├── public/                 # Static assets
+├── Dockerfile              # Docker configuration
+├── docker-compose.yml      # Docker compose setup
+└── next.config.ts          # Next.js configuration
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- MongoDB
+- Docker (for containerized deployment)
+
+### Local Development
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Raunakg2005/BajrangDal.git
+cd BajrangDal
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create `.env.local` file:
+```env
+MONGODB_URI=mongodb://localhost:27017/bajrang_dal
+ADMIN_PASSWORD=your_password_here
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+5. Open http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+### Docker Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Build the Docker image:
+```bash
+docker build -t bajrang-dal:latest .
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Run with Docker Compose:
+```bash
+docker-compose up -d
+```
 
-## Deploy on Vercel
+The application will be available at http://localhost:3000.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `MONGODB_URI` | MongoDB connection string | Yes |
+| `ADMIN_PASSWORD` | Admin dashboard password | Yes |
+
+## API Routes
+
+- `POST /api/applications` - Submit new membership application
+- `GET /api/applications` - Retrieve all applications (admin)
+- `PATCH /api/applications/[id]` - Update application status
+- `POST /api/auth` - Admin authentication
+
+## Security Features
+
+- Server-side authentication
+- Environment variable protection
+- Image compression (prevents large payload attacks)
+- HTTPS/SSL encryption (production)
+- Input validation and sanitization
+
+## Admin Access
+
+**URL:** https://bajrangdal.quantyxio.cloud/admin
+
+Default password is set via `ADMIN_PASSWORD` environment variable.
+
+## Production Deployment
+
+The application is deployed with:
+- Docker containers (isolated network)
+- Nginx reverse proxy
+- Let's Encrypt SSL certificate
+- Auto-renewal configuration
+- Port 3003 (internal), HTTPS 443 (external)
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## License
+
+This project is private and proprietary.
+
+## Contact
+
+For questions or support, contact the development team.
